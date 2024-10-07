@@ -12,7 +12,7 @@ const app = express();
 app.use(bodyParser.json());//se establece el formato de los datos
 //agregar añ middleware el objeto
 
-app.use(alumnosRoutes)// localhost:3000
+app.use('/alumnos', alumnosRoutes)// localhost:3000
 //app.use(express.static(path.join(__dirname, 'views')));
 
 const PORT = 3000;

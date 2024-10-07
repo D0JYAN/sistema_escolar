@@ -6,10 +6,10 @@ const rutas = express.Router();
 
 //definir un endpoinst para obtener la lista de los alumnos
 //METODO:GET(leer)
-rutas.get('/', function(req, res){
-   // res.send("<h1>hola mundo</h1>")
+rutas.get('/', function (req, res) {
+    res.send("<h1>hola mundo</h1>")
     res.json({
-        message:"hola mundo"
+        message: "hola mundo"
     })
 })
 
