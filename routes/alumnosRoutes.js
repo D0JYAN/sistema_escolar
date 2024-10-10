@@ -4,6 +4,10 @@
 const express = require('express');
 const rutas = express.Router();
 
+//Agregar los controladores
+const alumnoController = require('../controllers/alumnoController');
+const becaController = require('../controllers/becaController');
+
 //definir un endpoinst para obtener la lista de los alumnos
 
 
@@ -16,18 +20,10 @@ rutas.get('/', function (req, res) {
 })
 
 //METODO: POST(crear)
-rutas.post('/fichas', function (req, res) {//servicio
-    res.json({
-        message: "ficha creada con exito"
-    })
-})
+rutas.post("/fichas", alumnoController.fichas)
 
 //METODO: POST(crear)
-rutas.post('/becas', function (req, res) {//servicio
-    res.json({
-        message: "Registro de beca creada"
-    })
-})
+rutas.post("/becas", becaController.becas)
 
 //METODO: GET(leer)
 rutas.get('/calificaciones/:matricula', function (req, res) {//servicio
