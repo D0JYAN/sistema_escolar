@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const alumnosRoutes = require('./routes/alumnosRoutes');
 const docentesRoutes = require('./routes/docentesRoutes');
 const finanzasRoutes = require('./routes/finanzasRoutes');
-
+const usersRoutes = require('./routes/usersRoutes');
 
 
 const app = express();
@@ -18,6 +18,7 @@ app.use(bodyParser.json());//se establece el formato de los datos
 app.use('/alumnos', alumnosRoutes)// localhost:3000
 app.use("/docentes",docentesRoutes)
 app.use("/finanzas",finanzasRoutes)
+app.use("/users",usersRoutes)
 
 //app.use(express.static(path.join(__dirname, 'views')));
 
