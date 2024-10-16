@@ -10,7 +10,7 @@ const usersController = require('../controllers/usersControllers')
 router.post('/login', usersController.login)
 
 //Ruta de registro
-router.post('/register', (req, res) => {})
+router.post('/register', usersController.register)
 
 //Ruta para obtener la lista de usuarios
 router.get('/all_users', (req, res) => {})

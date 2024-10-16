@@ -19,8 +19,17 @@ exports.login = (req, res) => {
 }
 
 exports.register = (req, res) => {
-    res.json({
-        success: true
+    const {username, correo, password, rol} = req.body
+
+    const query = 'INSERT INTO `usuarios` (username, correo, password, rol) VALUES (?,?,?,?);'
+
+    //Crear un nuevo usuario y responde en consecuencia.
+    db.query(query, [username, correo, password, rol], (err, results) => {
+        if (err) throw err;
+        res.json({
+            message: "Registro Exitoso",
+            data: results
+        })
     })
 }
 
