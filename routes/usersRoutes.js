@@ -7,7 +7,7 @@ const usersController = require('../controllers/usersControllers')
 
 //Ruta de login
 
-router.get('/login', usersController.login)
+router.post('/login', usersController.login)
 
 //Ruta de registro
 router.post('/register', (req, res) => {})
