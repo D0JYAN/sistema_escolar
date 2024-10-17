@@ -13,6 +13,10 @@ router.post('/login', usersController.login)
 router.post('/register', usersController.register)
 
 //Ruta para obtener la lista de usuarios
-router.get('/all_users', (req, res) => {})
+router.get('/all_users', usersController.allUsers)
+
+//Ruta para obtener la lista de los usuarios por rol
+//router.get('/users_por_rol/:rol', usersController.usersByRol)
+router.get('/users_por_rol/', usersController.usersByRol)
 
 module.exports = router;

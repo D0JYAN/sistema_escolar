@@ -19,7 +19,7 @@ exports.login = (req, res) => {
 }
 
 exports.register = (req, res) => {
-    const {username, correo, password, rol} = req.body
+    const { username, correo, password, rol } = req.body
 
     const query = 'INSERT INTO `usuarios` (username, correo, password, rol) VALUES (?,?,?,?);'
 
@@ -34,7 +34,29 @@ exports.register = (req, res) => {
 }
 
 exports.allUsers = (req, res) => {
-    res.json({
-        success: true
+    //Llammar a todos los usuarios existentes
+    const query = 'SELECT * FROM `usuarios`;'
+
+    db.query(query, (err, results) => {
+        if (err) throw err;
+        res.json({
+            message: "Aqui estan toddos los usuarios existentes",
+            data: results
+        })
+    })
+}
+
+exports.usersByRol = (req, res) => {
+    const { rol } = req.body
+
+    //Llamar a todos los usuarios con un rol específico
+    const query = 'SELECT * FROM `usuarios` WHERE rol =?;'
+
+    db.query(query, [rol], (err, results) => {
+        if (err) throw err;
+        res.json({
+            message: "Aqui estan todos los usuarios con el rol especificado",
+            data: results
+        })
     })
 }
