@@ -40,7 +40,7 @@ exports.allUsers = (req, res) => {
     db.query(query, (err, results) => {
         if (err) throw err;
         res.json({
-            message: "Aqui estan toddos los usuarios existentes",
+            message: "Aqui estan todos los usuarios existentes",
             data: results
         })
     })
