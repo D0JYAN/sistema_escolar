@@ -60,3 +60,18 @@ exports.usersByRol = (req, res) => {
         })
     })
 }
+
+exports.updateUser = (req, res) => {
+    const { id } = req.params
+    const { username, correo, password, rol } = req.body
+
+    const query = 'UPDATE `usuarios` SET username=?, correo=?, password=?, rol=? WHERE id=?;'
+
+    db.query(query, [username, correo, password, rol, id], (err, results) => {
+        if (err) throw err;
+        res.json({
+            message: "Usuario actualizado correctamente",
+            data: results
+        })
+    })
+}
