@@ -1,29 +1,36 @@
 const connection = require('../models/database');
 const db = require('../models/database');
-const bycrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
-exports.login = (req, res) => {
-    const { username, password } = req.body
-
-    const query = 'SELECT * FROM `usuarios` WHERE username =? AND password =?;'
-
-    //Verificar las credenciales de un usuario y responde en consecuencia.
-    db.query(query, [username, password], (err, results) => {
+exports.login = async (req, res) => {
+    const { username, password } = req.body;
+    const query = 'SELECT * FROM `usuarios` WHERE username =?;';
+    
+    // Verificar las credenciales de un usuario y responde en consecuencia.
+    db.query(query, [username], async (err, results) => {
         if (err) throw err;
+
         if (results.length > 0) {
-            res.json({ message: "Login Exitoso", data: results })
-            //Generar un token
+            const user = results[0];
+            const isMatch = bcrypt.compare(password, user.password); // Comparar contraseñas
+
+            if (isMatch) {
+                res.json({ message: "Login Exitoso", data: results });
+                // Generar un token aquí
+            } else {
+                res.json({ message: "Usuario o contraseña incorrectos", data: [] });
+            }
         } else {
-            res.json({ message: "Usuario o contraseña incorrectos", data: [] })
+            res.json({ message: "Usuario o contraseña incorrectos", data: [] });
         }
-    })
+    });
 }
 
 exports.register = async (req, res) => {
     const { username, correo, password, rol } = req.body
 
     //Encriptar la contraseña antes de almacenarla en la base de datos
-    const passSecret = await bycrypt.hash(password, 10);
+    const passSecret = await bcrypt.hash(password, 10);
 
     const query = 'INSERT INTO `usuarios` (username, correo, password, rol) VALUES (?,?,?,?);'
 
