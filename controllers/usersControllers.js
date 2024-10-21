@@ -1,5 +1,6 @@
 const connection = require('../models/database');
 const db = require('../models/database');
+const bycrypt = require('bcryptjs');
 
 exports.login = (req, res) => {
     const { username, password } = req.body
@@ -18,13 +19,16 @@ exports.login = (req, res) => {
     })
 }
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     const { username, correo, password, rol } = req.body
+
+    //Encriptar la contraseña antes de almacenarla en la base de datos
+    const passSecret = await bycrypt.hash(password, 10);
 
     const query = 'INSERT INTO `usuarios` (username, correo, password, rol) VALUES (?,?,?,?);'
 
     //Crear un nuevo usuario y responde en consecuencia.
-    db.query(query, [username, correo, password, rol], (err, results) => {
+    db.query(query, [username, correo, passSecret, rol], (err, results) => {
         if (err) throw err;
         res.json({
             message: "Registro Exitoso",
