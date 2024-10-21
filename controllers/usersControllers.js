@@ -70,7 +70,7 @@ exports.updateUser = (req, res) => {
     db.query(query, [username, correo, password, rol, id], (err, results) => {
         if (err) throw err;
         res.json({
-            message: "Usuario actualizado correctamente",
+            message: "El usuario fue actualizado",
             data: results
         })
     })
