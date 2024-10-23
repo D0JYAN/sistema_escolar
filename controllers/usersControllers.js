@@ -47,10 +47,10 @@ exports.allUsers = (req, res) => {
 }
 
 exports.usersByRol = (req, res) => {
-    const { rol } = req.body
+    const { rol } = req.params
 
     //Llamar a todos los usuarios con un rol específico
-    const query = 'SELECT * FROM `usuarios` WHERE rol =?;'
+    const query = 'SELECT * FROM `usuarios` WHERE rol=?;'
 
     db.query(query, [rol], (err, results) => {
         if (err) throw err;
