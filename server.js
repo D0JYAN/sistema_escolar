@@ -14,7 +14,7 @@ const usersRoutes = require('./routes/usersRoutes');
 const app = express();
 
 //middlewares
-app.use(morgan('dev'))//dev, combined, common, short, tin
+app.use(morgan('dev'))//dev, combined, common, short, tiny
 app.use(bodyParser.json());//se establece el formato de los datos
 //agregar añ middleware el objeto
 
