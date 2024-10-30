@@ -24,8 +24,8 @@ function login() {
    })
    .then(dataJSON, () => {
     //dataJSON es un json
-    console.log(dataJSON);
-    alert(dataJSON);
+    console.log(dataJSON)
+    alert(dataJSON)
    })
    .catch(console.error())
 }
