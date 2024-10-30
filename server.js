@@ -14,6 +14,7 @@ const usersRoutes = require('./routes/usersRoutes');
 const app = express();
 
 //middlewares
+app.use(morgan('dev'))//dev, combined, common, short, tin
 app.use(bodyParser.json());//se establece el formato de los datos
 //agregar añ middleware el objeto
 
@@ -23,7 +24,7 @@ app.use("/finanzas",finanzasRoutes)
 app.use("/users",usersRoutes)
 
 //configurar morgan
-app.use(morgan('dev'))//dev, combined, common, short, tin
+
 
 //app.use(express.static(path.join(__dirname, 'views')));
 
