@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
 
         if (results.length > 0) {
             const user = results[0];
-            const isMatch = bcrypt.compare(password, user.password); // Comparar contraseñas
+            const isMatch = bcrypt.compareSync(password, user.password); // Comparar contraseñas
 
             if (isMatch) {
                 res.json({ message: "Login Exitoso", data: results });
