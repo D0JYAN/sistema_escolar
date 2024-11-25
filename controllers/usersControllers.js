@@ -1,4 +1,3 @@
-const connection = require('../models/database');
 const db = require('../models/database');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -16,9 +15,9 @@ exports.login = async (req, res) => {
             const isMatch = bcrypt.compareSync(password, user.password); // Comparar contraseñas
 
             if (isMatch) {
-                res.json({ message: "Login Exitoso", data: results });
-                // Generar un token aquí
                 const token = generarToken(user)//Se le pasan los datos del usuario
+                res.json({ message: "Login Exitoso", data: results, token });
+                // Generar un token aquí
             } else {
                 res.json({ message: "Usuario o contraseña incorrectos", data: [] });
             }
@@ -29,10 +28,10 @@ exports.login = async (req, res) => {
 }
 
 //Funcion para generar el token
-function generarToken() {
+function generarToken(user) {
     const password = "12345";
     const dataUser = {
-        id:user.id,
+        id: user.id,
         username: user.username,
         correo: user.correo,
         rol: user.rol
