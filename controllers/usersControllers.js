@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
 
             if (isMatch) {
                 const token = generarToken(user)//Se le pasan los datos del usuario
-                res.json({ message: "Login Exitoso", data: results, token });
+                res.json({ token });
                 // Generar un token aquí
             } else {
                 res.json({ message: "Usuario o contraseña incorrectos", data: [] });
