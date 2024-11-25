@@ -15,9 +15,13 @@ exports.login = async (req, res) => {
             const isMatch = bcrypt.compareSync(password, user.password); // Comparar contraseñas
 
             if (isMatch) {
-                const token = generarToken(user)//Se le pasan los datos del usuario
-                res.json({ token });
                 // Generar un token aquí
+                const token = generarToken(user)//Se le pasan los datos del usuario
+                //Almacenar el token en una cookie
+                /*Opcion 1.- El seridor almacena el token en una cookie*/
+                res.cookie('token: ', token, {httpOnly:true,secure:false,maxAge:3600000});
+                /*Opcion 2.- El servidor devielve el token y la aplicacion cliente lo almacena*/
+                res.json({ token });
             } else {
                 res.json({ message: "Usuario o contraseña incorrectos", data: [] });
             }
