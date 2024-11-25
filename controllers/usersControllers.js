@@ -19,7 +19,7 @@ exports.login = async (req, res) => {
                 const token = generarToken(user)//Se le pasan los datos del usuario
                 //Almacenar el token en una cookie
                 /*Opcion 1.- El seridor almacena el token en una cookie*/
-                res.cookie('token: ', token, {httpOnly:true,secure:false,maxAge:3600000});
+                res.cookie('token: ', token, {httpOnly:true,secure:false,maxAge:60000});
                 /*Opcion 2.- El servidor devielve el token y la aplicacion cliente lo almacena*/
                 res.json({ token });
             } else {
@@ -40,7 +40,7 @@ function generarToken(user) {
         correo: user.correo,
         rol: user.rol
     }
-    const token = jwt.sign(dataUser, password, {expiresIn: '1h'});
+    const token = jwt.sign(dataUser, password, {expiresIn: '1m'});
     return token;
 }
 
