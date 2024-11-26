@@ -13,7 +13,7 @@ router.post('/login', usersController.login)
 router.post('/register', usersController.register)
 
 //Ruta para obtener la lista de usuarios
-router.get('/all_users', usersController.allUsers)
+router.get('/all_users', verificarToken, usersController.allUsers)
 
 //Ruta para obtener la lista de los usuarios por rol
 router.get('/users_por_rol/:rol', usersController.usersByRol)
